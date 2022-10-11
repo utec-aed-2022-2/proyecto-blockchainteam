@@ -5,8 +5,8 @@ using namespace std;
 class Transaction{
  public:
     float mount;
-    string transmitter;
-    string receiver;
+    string transmitterKey;
+    string receiverKey;
 };
 
 
@@ -33,6 +33,22 @@ Block::Block(int index ,Transaction tscion , string  prev){
     this -> data = tscion;
     this -> prev = prev;
     this -> codHash = generateHash();
+}
+
+string Block::generateHash(){
+    return "CodigoHashGenerado";
+}
+
+string Block::getHash(){
+    return codHash;
+}
+
+string Block::getPrev(){
+    return codHash;
+}
+
+string Block::validateHash(){
+    if (codHash) return true;
 }
 
 

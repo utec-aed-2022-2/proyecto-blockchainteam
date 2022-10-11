@@ -11,9 +11,18 @@ class BlockChain{
 
     BlockChain();
 
+// Functions
     void addBlock(Transaction data){}
 
     void ValidBlockChain(){}
-
+   
 };
 
+BlockChain::BlockChain(){
+   Block valor = createBlock();
+   listChain.push_back(valor);
+}
+
+Block BlockChain::createBlock(){
+   
+}
