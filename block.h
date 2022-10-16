@@ -12,7 +12,7 @@ class Transaction{
 
 class Block{
  private:
-    int index;
+
     string generateHash(); // Transacciones
     string codHash; // Codigo hash del bloque
     string prev; // codig hash del anterior bloque
