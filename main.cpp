@@ -1,8 +1,26 @@
 #include<iostream>
 using namespace std;
 
+#include "block.h"
+#include "blockChain.h"
+
+void prueba(){
+    BlockChain listBlock;
+
+    time_t time1;
+    Transaction data1(1.5,"Wanly","Renzo",time(&time1));
+    listBlock.insertBlock(data1);
+
+    time_t time2;
+    Transaction data2(0.2,"Jean","Luis",time(&time2));
+    listBlock.insertBlock(data2);
+
+    listBlock.DisplayList();
+}
+
 int main(){
-    cout<<"Hola mundo "<<endl;
+    //prueba();
+    cout<<"hola mundo";
 }
 
 
@@ -18,9 +36,6 @@ BlockChain -> lista de bloques
 (Crear algoritmo hash)
     - Para generar codigo identificable 
     - Para verificar la integridad de un blque
-
-
-
 
 
 */

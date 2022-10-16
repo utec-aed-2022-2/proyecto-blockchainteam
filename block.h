@@ -7,36 +7,36 @@ class Transaction{
     float mount;
     string transmitterKey;
     string receiverKey;
+    time_t time;
+
+    Transaction(float mount, string send, string recib, time_t time): mount(mount), transmitterKey(send) , receiverKey(recib) , time(time){}
 };
 
 
 class Block{
  private:
-
-    string generateHash(); // Transacciones
-    string codHash; // Codigo hash del bloque
+    int index; // Posicion del bloque
+    string codHash; // Codigo hash del bloquew    
     string prev; // codig hash del anterior bloque
+    string generateHash();
+    Transaction data;
 
  public:    
     // Constructor
-    Block(int index ,Transaction tscion , string  prev);
+    Block(int index ,Transaction tscion , string  prev);           
+    string getHash();
+    string getPrev();
     
-    string getHash(){}
-    string getPrev(){}
-    
-    Transaction data;
-    bool validateHash(){}
+    bool validateHash();
 };
 
-Block::Block(int index ,Transaction tscion , string  prev){
-    this -> index = index;
-    this -> data = tscion;
-    this -> prev = prev;
-    this -> codHash = generateHash();
-}
+Block::Block(int idx ,Transaction tscion , string  prev)
+        : index(idx) , data(tscion) , prev(prev) , codHash(generateHash()) {}
+
 
 string Block::generateHash(){
-    return "CodigoHashGenerado";
+    string hash = "HashPara : " +  this -> data.transmitterKey + " >> " + this -> data.receiverKey + " >> " + to_string(this -> data.mount) ;
+    return hash; // modificar por nuestro propio hash
 }
 
 string Block::getHash(){
@@ -44,11 +44,9 @@ string Block::getHash(){
 }
 
 string Block::getPrev(){
-    return codHash;
+    return prev;
 }
 
-string Block::validateHash(){
-    if (codHash) return true;
-}
+
 
 
