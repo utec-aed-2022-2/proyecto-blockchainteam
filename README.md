@@ -8,15 +8,9 @@ Como ya mencionado antes, el modelo a crear brindará la seguridad de los datos 
 - La infomración de los usuarios  
 - Los montos que se transfiere
 
-El tema de block es  
-¿De que trata el proyecto?
-¿Importancia?¿Proposito?
-
-QUeremos crear una aplicación **Transfierte** , la cual tiene como objetivo poder realizar transacciones de dinero, desde un usuario a otro.
-
 La aplicación tendrá la seguridad de los datos:
-    - Información de los usuarios
-    - Monto transferido
+- Información de los usuarios
+- Monto transferido
 
 
 # Descripción  
@@ -29,9 +23,8 @@ El manejo de BlockChain a travez de bloques es sumamente importante debido a que
  
  - **No renocible**: La información de los usuarios que realizan la transacción permanecerá oculta a través de un código encriptado. Así cuidar la integridad de nuestros usuarios.
 
+ - **Nueva tecnología**: La importancia aquí es que, el BlockChain puede adaptarse a nuevas tecnologias y actualemnte se considera una de las mas confiables y seguras para el transporte de información.  
 
-# Estructura y Estrategias  
-Una de las estrategias es  
 
 # Estructuras  
 
@@ -40,10 +33,26 @@ Una de las estrategias es
 # Complejidad Big O  
 
 ## Insertar  
-O(N)  
+```
+string addBlock(Transaction* _data)
+   {
+    Block* block =  new Block(_data,LastHashId);
+    LastHashId = block->generateHash();
+    Structure.insert(block->getHash(), block);
+    return block->getHash();
+   }
+
+```
 
 ## Buscar  
-O(v^2)  
+Block* getBlockByHash(string hash) //O(K)
+   {
+      Block* block = Structure.get(hash);
+      // cout << block->   ();
+            // cout << block->get_Data()->getCantidadSoles();
+      return block;
+      // cout << block->data << endl;
+   }
 
 ## Comparación (Con índices | Sin índices)  
 Mostrar tabla  
