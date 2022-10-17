@@ -19,8 +19,13 @@ void prueba(){
 }
 
 int main(){
+<<<<<<< HEAD
     prueba();
     //cout<<"hola mundo";
+=======
+    //prueba();
+    cout<<"hola mundo";
+>>>>>>> 267435a9e6fa2fb009bb9511148f27b997a3afce
 }
 
 
@@ -38,4 +43,8 @@ BlockChain -> lista de bloques
     - Para verificar la integridad de un blque
 
 
+<<<<<<< HEAD
 */
+=======
+*/
+>>>>>>> 267435a9e6fa2fb009bb9511148f27b997a3afce

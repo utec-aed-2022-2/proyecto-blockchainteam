@@ -16,4 +16,8 @@ struct  transaction{
     transaction(float mount, string send, string recib, time_t time): mount(mount), transmitterKey(send) , receiverKey(recib) , time(time){}
 };
 
+<<<<<<< HEAD
 #endif
+=======
+#endif
+>>>>>>> 267435a9e6fa2fb009bb9511148f27b997a3afce

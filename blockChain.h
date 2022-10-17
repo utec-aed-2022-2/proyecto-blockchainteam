@@ -70,4 +70,8 @@ void blockChain::DisplayList(){
    cout << "pipip";
 }
 
+<<<<<<< HEAD
 #endif
+=======
+#endif
+>>>>>>> 267435a9e6fa2fb009bb9511148f27b997a3afce
