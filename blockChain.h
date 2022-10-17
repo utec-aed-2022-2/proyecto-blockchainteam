@@ -1,65 +1,73 @@
+#ifndef blockChain_h
+#define blockChain_h
+
 #include<iostream>
 #include<string>
+#include<vector>
 #include "block.h"
 using namespace std;
 
-class BlockChain{
+class blockChain{
  private:
-    Block createGenesisBlock(); // Primer valor del bloque
-    vector<Block> listChain;
+    block createGenesisBlock(); // Primer valor del bloque
+    vector<block> listChain;
 
  public:
+   blockChain();
 
-   BlockChain();
-   Block get_prev_list();
-   void insertBlock(Transaction data);
-   void searchBlock();
+   block *get_hash_prev_list();
+   void insertBlock(transaction data);
+   //void searchBlock();
    void DisplayList();
 };
 
-BlockChain::BlockChain(){
-   Block genesis = createGenesisBlock();
+blockChain::blockChain(){
+   block genesis = createGenesisBlock();
    listChain.push_back(genesis); // agregamos el primer valor
 }
 
-Block Blockchain::createGenesisBlock(){
-    time_t r_time;
+block blockChain::createGenesisBlock(){
+    time_t tiempo;
     // Inicio transaccion 
-    Transaction init(0, "Genesis", "Genesis", time(&r_time));    
-    Block genesis(0, init, 0);
+    transaction init(0, "Genesis", "Genesis", time(&tiempo));    
+    block genesis(0, init, " ");
     return genesis;
 }
 
 
-string BlockChain:: get_prev_list(){
- return this -> listChain.back() -> get_Hash(); 
+block *blockChain::get_hash_prev_list(){
+   
+ return  &listChain.back();
  // Obtener el último elemnto de la lista para encontrar el hash del prev
 }
 
-void BlockChain::insertBlock(Transaction data){
+void blockChain::insertBlock(transaction data){
+   // Verificar que ninguno de los bloques haya sido modificado
+
    int index = size(this -> listChain);
-   string prev = get_prev_list();
-   Block newBlock(index , data , prev);
-   listChain.pushback(newBlock);
+   string prev = get_hash_prev_list()->getHash(); // Verifica solo el anterior, necesitamos que verifique todas
+   block newBlock(index , data , prev);
+   listChain.push_back(newBlock);
    
 }
 
-void BlockChain::searchBlock(){
+//void blockChain::searchBlock(){
    //BlockEncontrado.DisplayList
+//}
+
+void blockChain::DisplayList(){
+   ////Mosrar
+   //vector<block>::iterator i = listChain.begin();
+   //for (i ; i != listChain.end(); ++i){
+   //     block currentBlock = *i;
+   //     cout<<"\n\nBlock ===================================";
+   //     cout<<"\nAmount: ", currentBlock.getData().mount;
+   //     cout<<"\nSenderKey: ", currentBlock.getData().transmitterKey;
+   //     cout<<"\nReceiverKey: ", currentBlock.getData().receiverKey;
+   //     cout<<"\nTimestamp: ", currentBlock.getData().time;
+   //     cout<<"\nHash: ", currentBlock.getHash();
+   // }
+   cout << "pipip";
 }
 
-void BlockChain::DisplayList(){
-   //Mosrar
-   vector<Block> i = listChain.begin();
-   for (i ; i != chain.end(); ++i){
-        Block currentBlock = i;
-        cout<<"\n\nBlock ===================================";
-        cout<<"\nIndex: %d", currentBlock.getIndex();
-        cout<<"\nAmount: %f", currentBlock.data.mount;
-        cout<<"\nSenderKey: %s", currentBlock.data.transmitterKey;
-        cout<<"\nReceiverKey: %s", currentBlock.data.receiverKey;
-        cout<<"\nTimestamp: %ld", currentBlock.data.time;
-        cout<<"\nHash: %zu", currentBlock.getHash();
-    }
-}
-
+#endif

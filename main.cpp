@@ -5,22 +5,22 @@ using namespace std;
 #include "blockChain.h"
 
 void prueba(){
-    BlockChain listBlock;
+    blockChain listBlock;
 
     time_t time1;
-    Transaction data1(1.5,"Wanly","Renzo",time(&time1));
+    transaction data1(1.5,"Wanly","Renzo",time(&time1));
     listBlock.insertBlock(data1);
 
     time_t time2;
-    Transaction data2(0.2,"Jean","Luis",time(&time2));
+    transaction data2(0.2,"Jean","Luis",time(&time2));
     listBlock.insertBlock(data2);
 
     listBlock.DisplayList();
 }
 
 int main(){
-    //prueba();
-    cout<<"hola mundo";
+    prueba();
+    //cout<<"hola mundo";
 }
 
 

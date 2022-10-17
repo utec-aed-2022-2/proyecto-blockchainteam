@@ -2,6 +2,12 @@
 
 
 # Introducción  
+El proyecto planteado consiste en la creación una aplicación de transferencias. La aplicación tiene por nombre **Transfierete** , el objetivo es poder realizar transacciones de dinero desde un usuario a otro de manera segura. 
+
+Como ya mencionado antes, el modelo a crear brindará la seguridad de los datos como:  
+- La infomración de los usuarios  
+- Los montos que se transfiere
+
 El tema de block es  
 ¿De que trata el proyecto?
 ¿Importancia?¿Proposito?
@@ -13,29 +19,23 @@ La aplicación tendrá la seguridad de los datos:
     - Monto transferido
 
 
-
-El proyecto planteado consiste en poder crear un aplicativo de transferencias bancarias, que cumpla con la validación y la integridad de los datos.
-
-
 # Descripción  
-Para el realce, se hace uso de la tecnologia basada en BlockChain, la cual consiste en la creación de bloques enlazados. Y cada bloque tendrá la información necesaria para que las transacciones se realicen de manera segura, evitando que la informació
+Para el realce del proyecto, se hace uso de la tecnología basada en BlockChain, la cual consiste en la creación de bloques enlazados, y cada bloque tendrá la información necesaria para que las transacciones se realicen de manera segura, evitando que la información sea modificada u obtenida por otros usuarios.
 
 # Importancia  
-La importancia del manejo del BlockChain, es que cada que se intenté modificar la información 
+El manejo de BlockChain a travez de bloques es sumamente importante debido a que es:
 
- - No modificable: Cada bloque depende del codigo encriptado del anterior, para así cuandoo se intente modificar algún bloque, primero se tendría que validar el anterior y así sucesivamente.
+ - **No modificable**: Cada bloque depende del código encriptado del anterior, para así cuando se intente modificar algún bloque, primero se tendría que validar el anterior y así sucesivamente.
  
- - No renocible: La información de los usuarios que realizan la transacción permanecerá oculta a través de un código encriptado. Así cuidar la integridad de nuestros usuarios.
+ - **No renocible**: La información de los usuarios que realizan la transacción permanecerá oculta a través de un código encriptado. Así cuidar la integridad de nuestros usuarios.
 
- - 
 
 # Estructura y Estrategias  
 Una de las estrategias es  
 
 # Estructuras  
 
-Block , Transaction , BlockChain , Hash
-
+![](estructura.JPG)
 
 # Complejidad Big O  
 
