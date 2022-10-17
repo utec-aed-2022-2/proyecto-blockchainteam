@@ -1,54 +1,36 @@
+#ifndef block_h
+#define block_h
+
 #include<iostream>
 #include<string>
+#include "transaction.h"
 using namespace std;
 
-class Transaction{
- public:
-    float mount;
-    string transmitterKey;
-    string receiverKey;
-};
-
-
-class Block{
+class block{
  private:
-
-    string generateHash(); // Transacciones
-    string codHash; // Codigo hash del bloque
+    int index; // Posicion del bloque
+    string codHash; // Codigo hash del bloquew    
     string prev; // codig hash del anterior bloque
+    string generateHash();
+    transaction data;
 
  public:    
     // Constructor
-    Block(int index ,Transaction tscion , string  prev);
-    
-    string getHash(){}
-    string getPrev(){}
-    
-    Transaction data;
-    bool validateHash(){}
+    block(int index ,transaction tscion , string  prev);           
+    string getHash(){return codHash;}
+    string getPrev(){return prev;}
+    transaction getData(){return data;}
 };
 
-Block::Block(int index ,Transaction tscion , string  prev){
-    this -> index = index;
-    this -> data = tscion;
-    this -> prev = prev;
-    this -> codHash = generateHash();
+block::block(int idx ,transaction tscion , string  prev)
+        : index(idx) , data(tscion) , prev(prev) , codHash(generateHash()) {}
+
+
+string block::generateHash(){
+    string hash = "HashPara : " +  this -> data.transmitterKey + " >> " + this -> data.receiverKey + " >> " + to_string(this -> data.mount) ;
+    return hash; // modificar por nuestro propio hash
 }
 
-string Block::generateHash(){
-    return "CodigoHashGenerado";
-}
-
-string Block::getHash(){
-    return codHash;
-}
-
-string Block::getPrev(){
-    return codHash;
-}
-
-string Block::validateHash(){
-    if (codHash) return true;
-}
+#endif
 
 
