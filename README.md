@@ -22,6 +22,8 @@ El manejo de BlockChain a travez de bloques es sumamente importante debido a que
 
  - **Nueva tecnología**: La importancia aquí es que, el BlockChain puede adaptarse a nuevas tecnologias y actualemnte se considera una de las mas confiables y seguras para el transporte de información.  
 
+# Organización  
+[Link de tareas asignadas](https://github.com/users/wanly13/projects/2/views/1)
 
 # Estructuras  
 
