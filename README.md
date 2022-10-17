@@ -53,7 +53,21 @@ Block* getBlockByHash(string hash) //O(K)
       return block;
       // cout << block->data << endl;
    }
-   
+
+TV get(TK key){
+        size_t hashcode = getHash(key);
+        int index = hashcode % capacity;
+        //TODO: iterar en la lista array[index]
+        for (auto &i : array[index]) {
+            if (i.key == key) {
+              return i.value;//valor entrado
+            }
+        }
+        return TV{};//valor no encontrado
+
+    }
+
+>> Complejidad = O(1)
 ```  
 
 # Comparación (Con índices | Sin índices)  
