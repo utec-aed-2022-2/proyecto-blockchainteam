@@ -35,8 +35,9 @@ block blockChain::createGenesisBlock(){
 }
 
 
-string blockChain:: *get_hash_prev_list(){
- return  listChain.back(). get_Hash(); 
+block *blockChain::get_hash_prev_list(){
+   
+ return  &listChain.back();
  // Obtener el último elemnto de la lista para encontrar el hash del prev
 }
 
@@ -44,7 +45,7 @@ void blockChain::insertBlock(transaction data){
    // Verificar que ninguno de los bloques haya sido modificado
 
    int index = size(this -> listChain);
-   string prev = get_prev_list(); // Verifica solo el anterior, necesitamos que verifique todas
+   string prev = get_hash_prev_list()->getHash(); // Verifica solo el anterior, necesitamos que verifique todas
    block newBlock(index , data , prev);
    listChain.push_back(newBlock);
    
@@ -55,17 +56,17 @@ void blockChain::insertBlock(transaction data){
 //}
 
 void blockChain::DisplayList(){
-   //Mosrar
-  // vector<block> i = listChain.begin();
-  // for (i ; i != chain.end(); ++i){
-  //      block currentBlock = i;
-  //      cout<<"\n\nBlock ===================================";
-  // //     cout<<"\nAmount: ", currentBlock.getData().mount;//
+   ////Mosrar
+   //vector<block>::iterator i = listChain.begin();
+   //for (i ; i != listChain.end(); ++i){
+   //     block currentBlock = *i;
+   //     cout<<"\n\nBlock ===================================";
+   //     cout<<"\nAmount: ", currentBlock.getData().mount;
    //     cout<<"\nSenderKey: ", currentBlock.getData().transmitterKey;
    //     cout<<"\nReceiverKey: ", currentBlock.getData().receiverKey;
    //     cout<<"\nTimestamp: ", currentBlock.getData().time;
    //     cout<<"\nHash: ", currentBlock.getHash();
-//    }
+   // }
    cout << "pipip";
 }
 
