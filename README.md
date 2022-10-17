@@ -45,7 +45,6 @@ string addBlock(Transaction* _data){
 ```
 
 ## Buscar  
-
 ```
 Block* getBlockByHash(string hash) //O(K)
    {
@@ -55,7 +54,8 @@ Block* getBlockByHash(string hash) //O(K)
       return block;
       // cout << block->data << endl;
    }
-```
+   
+```  
 
 # Comparación (Con índices | Sin índices)  
 
