@@ -2,17 +2,16 @@
 
 
 # Introducción  
-El proyecto planteado consiste en la creación una aplicación de transferencias. La aplicación tiene por nombre **Transfierete** , el objetivo es poder realizar transacciones de dinero desde un usuario a otro de manera segura. 
+El proyecto planteado consiste en la creación una aplicación de transferencias. La aplicación tiene por nombre **Transfierete** , el objetivo es poder realizar transacciones de dinero desde un usuario a otro de manera segura, como una alternativa segura para los usarios.  
 
-Como ya mencionado antes, el proyecto brindará la seguridad de los siguientes datos:  
+Como ya mencionado antes, el proyecto brindará la seguridad en los siguientes datos:  
 
-- La infomración de los usuarios  
-- Los montos que se transfiere
-
+- La identidad e información de los usuarios  
+- Los montos que transfiere y recibe 
 
 
 # Descripción  
-Para el realce del proyecto, se hace uso de la tecnología basada en BlockChain, la cual consiste en la creación de bloques enlazados, y cada bloque tendrá la información necesaria para que las transacciones se realicen de manera segura, evitando así que la información sea modificada u obtenida por otros usuarios.
+Para el realce del proyecto, se hace uso de la tecnología basada en BlockChain. Esta misma consiste en la creación de bloques enlazados, y cada bloque tendrá la información necesaria para que las transacciones se realicen de manera segura, evitando así que la información sea modificada u obtenida por otros usuarios.
 
 # Importancia  
 El manejo de BlockChain a travez de bloques es sumamente importante debido a que es:
@@ -59,7 +58,8 @@ Block* getBlockByHash(string hash) //O(K)
 
 
 # Conclusiones  
-En conclusión la tecnología del BLockChain tiene la posibilidad de brindar la integridad de nuestros usuarios y así mismo puede brindar la seguridad de cada uno de los datos. Esta tecnología puede llegar a ser usado en distintas ramas ya sea legales, sociales, financieras y entre otros. 
+En conclusión la tecnología del BLockChain tiene la posibilidad de brindar la confidencialidad de nuestros usuarios y así mismo puede brindar la seguridad de cada uno de los datos. Esta tecnología puede llegar a ser la nueva alternativa que muchos usuarios obtarian ya que puede ser usado en distintas ramas ya sea legales, sociales, financieras y entre otros. 
+
 
 # Referencias  
 
