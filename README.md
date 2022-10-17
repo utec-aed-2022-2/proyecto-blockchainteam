@@ -32,19 +32,21 @@ El manejo de BlockChain a travez de bloques es sumamente importante debido a que
 
 # Complejidad Big O  
 
-## Insertar  
+## Insertar (BLockChain)
 ```
-string addBlock(Transaction* _data)
-   {
-    Block* block =  new Block(_data,LastHashId);
-    LastHashId = block->generateHash();
-    Structure.insert(block->getHash(), block);
-    return block->getHash();
+string addBlock(Transaction* _data){  
+    Block* block =  new Block(_data,LastHashId); // O(1)
+    LastHashId = block->generateHash(); O(n)
+    Structure.insert(block->getHash(), block);  O(n)
+    return block->getHash(); O(1)
    }
 
+>> Complejidad = O(n)
 ```
 
 ## Buscar  
+
+```
 Block* getBlockByHash(string hash) //O(K)
    {
       Block* block = Structure.get(hash);
@@ -53,13 +55,18 @@ Block* getBlockByHash(string hash) //O(K)
       return block;
       // cout << block->data << endl;
    }
+```
 
-## Comparación (Con índices | Sin índices)  
-Mostrar tabla  
+# Comparación (Con índices | Sin índices)  
+
 
 # Conclusiones  
-En conclusion  
+En conclusión la tecnología del BLockChain tiene la posibilidad de brindar la integridad de nuestros usuarios y así mismo puede brindar la seguridad de cada uno de los datos. Esta tecnología puede llegar a ser usado en distintas ramas ya sea legales, sociales, financieras y entre otros. 
 
 # Referencias  
-Preimera ref  
 
+- ¿QUÉ es y CÓMO funciona el BLOCKCHAIN? en 6 MINUTOS. TIENES QUE SABERLO ¡YA! 📖💰. (2018, 28 marzo). [Vídeo]. YouTube. Recuperado 17 de octubre de 2022, de https://www.youtube.com/watch?v=C5NZnD12yjg  
+
+- Los Beneficios del Blockchain. (2022, 11 agosto). Campus Internacional de Blockchain. Recuperado 17 de octubre de 2022, de https://www.campusblockchain.es/los-beneficios-del-blockchain/  
+
+- MD5 Implementation in C++ - Programming Algorithms. (2015, 11 septiembre). Recuperado 17 de octubre de 2022, de https://www.programmingalgorithms.com/algorithm/md5/cpp/  
