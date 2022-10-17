@@ -2,23 +2,40 @@
 
 
 # Introducción  
-El tema de block es   
+El tema de block es  
+¿De que trata el proyecto?
+¿Importancia?¿Proposito?
+
+QUeremos crear una aplicación **Transfierte** , la cual tiene como objetivo poder realizar transacciones de dinero, desde un usuario a otro.
+
+La aplicación tendrá la seguridad de los datos:
+    - Información de los usuarios
+    - Monto transferido
+
+
+
+El proyecto planteado consiste en poder crear un aplicativo de transferencias bancarias, que cumpla con la validación y la integridad de los datos.
 
 
 # Descripción  
-La descripcion es  
+Para el realce, se hace uso de la tecnologia basada en BlockChain, la cual consiste en la creación de bloques enlazados. Y cada bloque tendrá la información necesaria para que las transacciones se realicen de manera segura, evitando que la informació
 
 # Importancia  
-La importancia es  
+La importancia del manejo del BlockChain, es que cada que se intenté modificar la información 
+
+ - No modificable: Cada bloque depende del codigo encriptado del anterior, para así cuandoo se intente modificar algún bloque, primero se tendría que validar el anterior y así sucesivamente.
+ 
+ - No renocible: La información de los usuarios que realizan la transacción permanecerá oculta a través de un código encriptado. Así cuidar la integridad de nuestros usuarios.
+
+ - 
 
 # Estructura y Estrategias  
 Una de las estrategias es  
 
 # Estructuras  
-Una de las estructures es  
 
-## Diagramas  
-Diagrama 1  
+Block , Transaction , BlockChain , Hash
+
 
 # Complejidad Big O  
 
