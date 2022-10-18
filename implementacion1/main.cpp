@@ -1,9 +1,13 @@
 #include "blockchain.h"
 #include<chrono>
+#include<vector>
+#include<fstream>
+#include<sstream>
 
 int menu(BlockChain & cadena);
 void test(BlockChain & cadena);
 void insert_data(BlockChain & cadena);
+vector<TransactionD*> loadCSV(string file);
 
 int main()
 {
@@ -100,6 +104,16 @@ void test(BlockChain & cadena)
 {
     // transacciones
     list<TransactionD *> reg;
+    vector<TransactionD*> transacciones = loadCSV("MOCK_DATA2.csv");
+    for(int i=0; i< transacciones.size(); i++){
+        if(i%4==0 && i!=0){
+            cadena.insert_block(reg);
+            reg.clear();
+        }
+        reg.push_back(transacciones[i]);
+    }
+
+    /*
     TransactionD *reg1 = new TransactionD(5000, "Pepe", "Pepa", "11:53", "Aug 25, 2022");
     TransactionD *reg2 = new TransactionD(35, "Piero", "Carla", "10:31", "Sep 11, 2001");
     TransactionD *reg3 = new TransactionD(559, "Daniela", "Carla", "13:24", "Jan 19, 2022");
@@ -131,4 +145,32 @@ void test(BlockChain & cadena)
 
     reg = {reg1, reg2, reg3, reg4};
     cadena.insert_block(reg);
+    */
+};
+
+vector<TransactionD*> loadCSV(string file)
+{
+  vector<TransactionD*> data;
+  fstream fin;
+  fin.open(file, ios::in);
+  vector<string> row;
+  string line, word, temp;
+  int i = 0;
+  while (!fin.eof())
+  {
+    row.clear();
+    getline(fin, line);
+    if (i++ == 0)
+      continue;
+    stringstream s(line);
+    while (getline(s, word, ';'))
+    {
+      row.push_back(word);
+    }    
+    if (row.size() == 5){
+        TransactionD * t = new TransactionD (stof(row[0]), row[1], row[2], row[3], row[4]);
+        data.push_back(t);
+    }
+  }
+  return data;
 }
