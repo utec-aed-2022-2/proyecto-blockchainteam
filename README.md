@@ -32,7 +32,7 @@ Tareas Asignadas:
 
 # Estructuras  
 
-![](estructura.JPG)
+![](estructura.jpeg)
 
 DESCRIPCIÓN ESTRUCTURAS:  
 
@@ -40,7 +40,8 @@ DESCRIPCIÓN ESTRUCTURAS:
 - **blockchain.h** : Contiene el registro de todas las *Transacciones*,
 - **Transaction.h** : Contiene los datos de las transacciones y es conectada con cada bloque. En este apartado se puede tener mas de una transacción dentro de un bloque. 
 - **sha256.h** : Se realiza el método de encriptación para la generación del Hash y prevHash.
-- **md5.h** : Se usa para realizar el método de encriptación para la base de datos (PostressSQL), con el fin de tener un backup de las transacciones de forma segura e inaccesible para cualquier persona.
+- **md5.h** : Se usa para realizar el método de encriptación para la base de datos (PostressSQL), con el fin de tener un backup de las transacciones de forma segura e inaccesible para cualquier persona.  
+- **mysql.cpp** : El archivo se encarga de realizar la conexión entre la base de datos en la nube del servicio AWS. _**(En Proceso)**_
 
 # Conplejidad Big O  
 
