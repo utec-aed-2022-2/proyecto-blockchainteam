@@ -50,7 +50,8 @@ int menu(BlockChain &cadena)
             cout << "Cuantas Transacciones ingresara? (multiplo de 4, minimo 4): ";
             cin >> v;
         } while (v <= 0 || v % 4 != 0);
-        for (int i = 0; i < v; i++)
+        int tr= v/4;
+        for (int i = 0; i < tr; i++)
         {
             insert_data(cadena);
         }
