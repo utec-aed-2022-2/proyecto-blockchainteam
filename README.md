@@ -2,78 +2,111 @@
 
 
 # Introducción  
-El proyecto planteado consiste en la creación una aplicación de transferencias. La aplicación tiene por nombre **Transfierete** , el objetivo es poder realizar transacciones de dinero desde un usuario a otro de manera segura, como una alternativa segura para los usarios.  
+Con el paso de los años el dinero fue tomando miles de formas, desde pesados metales hasta papel con valor impreso en el. Su forma mas compacta conocida hasta la fecha es el dinero digital.
+
+ Con el fin de explotar este concepto de la mejor forma, nuestro proyecto planteado consiste en la creación una aplicación de transferencias. La aplicación tiene por nombre *Transfierete* , el objetivo es poder realizar transacciones de dinero desde un usuario a otro de manera segura, como una alternativa segura para los usarios.  
 
 Como ya mencionado antes, el proyecto brindará la seguridad en los siguientes datos:  
 
-- La identidad e información de los usuarios  
-- Los montos que transfiere y recibe 
+- La identidad e información de los usuarios.  
+- Los montos que transfiere y recibe.
 
 
 # Descripción  
 Para el realce del proyecto, se hace uso de la tecnología basada en BlockChain. Esta misma consiste en la creación de bloques enlazados, y cada bloque tendrá la información necesaria para que las transacciones se realicen de manera segura, evitando así que la información sea modificada u obtenida por otros usuarios.
 
 # Importancia  
-El manejo de BlockChain a travez de bloques es sumamente importante debido a que es:
+El manejo de BlockChain a través de bloques es sumamente importante debido a que es:
 
  - **No modificable**: Cada bloque depende del código encriptado del anterior, para así cuando se intente modificar algún bloque, primero se tendría que validar el anterior y así sucesivamente.
  
- - **No renocible**: La información de los usuarios que realizan la transacción permanecerá oculta a través de un código encriptado. Así cuidar la integridad de nuestros usuarios.
+ - **No reconocible**: La información de los usuarios que realizan la transacción permanecerá oculta a través de un código encriptado. Así cuidar la integridad de nuestros usuarios.
 
- - **Nueva tecnología**: La importancia aquí es que, el BlockChain puede adaptarse a nuevas tecnologias y actualemnte se considera una de las mas confiables y seguras para el transporte de información.  
+ - **Nueva tecnología**: La importancia aquí es que, el BlockChain puede adaptarse a nuevas tecnologías y actualmente se considera una de las mas confiables y seguras para el transporte de información.  
 
 # Organización  
 [Link de tareas asignadas](https://github.com/orgs/utec-aed-2022-2/projects/13)
+
+Tareas Asignadas:  
+![](tareas.JPG)
 
 # Estructuras  
 
 ![](estructura.JPG)
 
-# Complejidad Big O  
+DESCRIPCIÓN ESTRUCTURAS:  
+
+- **block.h** : Contiene el registro de todas las *Transacciones*, adicionalmente contiene su *hash único* y el *hash anterior* (Ambos generados mediante una _**structura sha256**_).  
+- **blockchain.h** : Contiene el registro de todas las *Transacciones*,
+- **Transaction.h** : Contiene los datos de las transacciones y es conectada con cada bloque. En este apartado se puede tener mas de una transacción dentro de un bloque. 
+- **sha256.h** : Se realiza el método de encriptación para la generación del Hash y prevHash.
+- **md5.h** : Se usa para realizar el método de encriptación para la base de datos (PostressSQL), con el fin de tener un backup de las transacciones de forma segura e inaccesible para cualquier persona.
+
+# Conplejidad Big O  
 
 ## Insertar (BLockChain)
-```
-string addBlock(Transaction* _data){  
-    Block* block =  new Block(_data,LastHashId); // O(1)
-    LastHashId = block->generateHash(); O(n)
-    Structure.insert(block->getHash(), block);  O(n)
-    return block->getHash(); O(1)
-   }
 
->> Complejidad = O(n)
+- Partiendo del concepto de listas enlazadas, la complejidad del insert será 
+O(1), ya que se sacara el hash del ultimo bloque existente para vincularlo con el nuevo bloque el cual se insertara al inicio.
+```
+void insert_block ( list<TransactionD*> reg) {   
+    int index = n_elements+1;                               //O(1)
+    string cod;                                             //O(1)
+    if(n_elements == 0){
+        cod = "0";
+    }
+    else{
+        cod = chain.front()->get_hash();                    //O(1)
+    };
+    Block * newBlock = new Block(index, cod, reg);          //O(1)
+    chain.push_front(newBlock);                             //O(1)
+    this->n_elements++;
+    
+    cout<<"######################################################################################"<<endl
+        <<endl<<"\t\t\t\tBLOQUE NRO: "<<index<<endl<<endl
+        <<"NONCE: "<<newBlock->get_nonce()<<endl
+        <<"NRO TRANSACCIONES:  "<<4<<endl<<endl; 
+        newBlock->show_data();
+        cout<<"CODIGO HASH PREVIO: "<<newBlock->get_prev_hash()<<endl
+        <<"CODIGO HASH: "<<newBlock->get_hash()<<endl<<endl
+        <<"######################################################################################"<<endl<<endl;
+        
+};
+
+>> Complejidad = O(1)
 ```
 
 ## Buscar  
 ```
-Block* getBlockByHash(string hash) //O(K)
-   {
-      Block* block = Structure.get(hash);
-      // cout << block->   ();
-            // cout << block->get_Data()->getCantidadSoles();
-      return block;
-      // cout << block->data << endl;
-   }
+El buscar se basa en recorrer todos los block's hasta encontrar el corrercto por lo tanto la complejidad seria O(n)
 
-TV get(TK key){
-        size_t hashcode = getHash(key);
-        int index = hashcode % capacity;
-        //TODO: iterar en la lista array[index]
-        for (auto &i : array[index]) {
-            if (i.key == key) {
-              return i.value;//valor entrado
-            }
-        }
-        return TV{};//valor no encontrado
+void BlockChain::find(string hashcode){
 
+    for(auto &it: chain){                               //O(n)
+        if(it->get_hash()==hashcode){                   //O(1)
+            cout<<endl<<"Se encontro el bloque..."<<endl;
+            cout<<"######################################################################################"<<endl
+            <<endl<<"\t\t\t\tBLOQUE NRO: "<<it->get_index()<<endl<<endl         //O(1)
+            <<"NONCE: "<<it->get_nonce()<<endl                                  //O(1)
+            <<"NRO TRANSACCIONES:  "<<4<<endl<<endl; 
+            it->show_data();                                                    //O(1)
+            cout<<"CODIGO HASH PREVIO: "<<it->get_prev_hash()<<endl             //O(1)
+            <<"CODIGO HASH: "<<it->get_hash()<<endl<<endl                       //O(1)
+            <<"######################################################################################"<<endl<<endl;
+            return;
+        } 
     }
+    cout<<"No se encontro el bloque...\n";
+}
 
->> Complejidad = O(1)
+>> Complejidad = O(n)
+
 ```  
 
 # Comparación (Con índices | Sin índices)  
+_**En proceso**_  
 
-
-# Conclusiones  
+# Conclusión
 En conclusión la tecnología del BLockChain tiene la posibilidad de brindar la confidencialidad de nuestros usuarios y así mismo puede brindar la seguridad de cada uno de los datos. Esta tecnología puede llegar a ser la nueva alternativa que muchos usuarios obtarian ya que puede ser usado en distintas ramas ya sea legales, sociales, financieras y entre otros. 
 
 

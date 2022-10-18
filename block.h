@@ -42,9 +42,9 @@ class Transaction{
 
 class Block{ // O(1)
    private:
-   string hash;
+   string hash; // Se genera en cada iteracion
    string prevHash;
-   string nounce;
+   string nounce; // hash correcto que necesitamos
    Transaction* data;
    public:
    Block(Transaction* tx, string  prev): data(tx), prevHash(prev){} // O(1)
