@@ -76,6 +76,17 @@ void insert_block ( list<TransactionD*> reg) {
 
 >> Complejidad = O(1)
 ```
+## Búsqueda del Nonce
+
+> El método de encriptación que usamos para obtener el Hashcode se llama SHA256.
+> De forma general, para obtener el código hash usamos todos los datos de la transacción, el índice del bloque, y el Código hash del bloque anterior (En caso de ser el bloque 1, el código hash previo es '0'), y posteriormente procedemos a concatenarlos en un string. Luego, iniciamos un bucle (se especifica más adelante) en donde se buscará un número(nonce) aleatorio en un rango determinado () que al concatenarse con el string previo y, al obtener el código hash de ese string (llamando a la función SHA256), se obtenga un Hashcode que inicie con 4 ceros.  
+
+### La función SHA256(Secure Hash Algorithm of 256 bytes)
+
+> Este algoritmo de encriptación es muy usado actualmente, y se dice que es el reemplazo del algoritmo de encriptación md5, debido a su seguridad y rapidez. No nos hemos adentrado a fondo a entender cómo funciona este algoritmo, por lo que la implementación de la función SHA256 que se usa en este proyecto no es propia. 
+
+> La función que usamos en el proyecto retorna el código hash a partir de un conjunto de caracteres(string). Volviendo al punto anterior (inicialización del bucle), una vez que ya tenemos el Hashcode (del string con el nonce concatenado), procedemos a realizar una evaluación del primer carácter, último carácter, carácter central, y el anterior al central. Para que el código hash sea válido, verificamos que se cumplan ciertas condiciones aritméticas con el código ASCII de estos caracteres. La cantidad de condiciones y el tipo de complejidad de estas repercuten en el tiempo de búsqueda del nonce apropiado. Si aumentamos las condiciones, y si las hacemos más "complejas”, el tiempo de búsqueda aumentara considerablemente.
+> Una vez encontremos el nonce apropiado, procedemos a reemplazar los primeros cuatro valores del string Hashcode con '0000', y retornamos la cadena.
 
 ## Buscar  
 ```
