@@ -176,9 +176,9 @@ Una vez encontremos el nonce apropiado, procedemos a reemplazar los primeros cua
 ```
 
 ## Buscar  
-```c++
-El buscar se basa en recorrer todos los block's hasta encontrar el corrercto por lo tanto la complejidad seria O(n)
 
+El buscar se basa en recorrer todos los block's hasta encontrar el corrercto por lo tanto la complejidad seria O(n).
+```c++
 void BlockChain::find(string hashcode){
 
     for(auto &it: chain){                               //O(n)
@@ -197,10 +197,8 @@ void BlockChain::find(string hashcode){
     }
     cout<<"No se encontro el bloque...\n";
 }
-
->> Complejidad = O(n)
-
 ```  
+>> Complejidad = O(n)
 
 # Comparación (Con índices | Sin índices)  
 _**En proceso**_  
