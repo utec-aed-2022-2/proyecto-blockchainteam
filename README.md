@@ -82,7 +82,7 @@ Para obtener el Hashcode del bloque, usamos el método de encriptación SHA256.
 
 De forma general, para obtener el código hash usamos todos los datos de la transacción, el índice del bloque, y el Código hash del bloque anterior (En caso de ser el bloque 1, el código hash previo es '0'), y posteriormente procedemos a concatenarlos en un string. Luego, iniciamos un bucle (se especifica más adelante) en donde se buscará un número(nonce) aleatorio en un rango determinado(1000 - 9999) que al concatenarse con el string previo y, al obtener el código hash de ese string (llamando a la función SHA256), se obtenga un Hashcode que inicie con 4 ceros.  
 
-```
+```c++
 string Block::createHashcode() // el codigo hash depende de todos los valores del conjunto de registros, lo cual lo hace mas seguro
 {
     string to_hash = "";
