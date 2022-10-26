@@ -49,7 +49,7 @@ DESCRIPCIÓN ESTRUCTURAS:
 
 - Partiendo del concepto de listas enlazadas, la complejidad del insert será 
 O(1), ya que se sacara el hash del ultimo bloque existente para vincularlo con el nuevo bloque el cual se insertara al inicio.
-```
+```c++
 void insert_block ( list<TransactionD*> reg) {   
     int index = n_elements+1;                               //O(1)
     string cod;                                             //O(1)
@@ -138,7 +138,7 @@ string Block::createHashcode() // el codigo hash depende de todos los valores de
 La función que usamos en el proyecto retorna el código hash a partir de un conjunto de caracteres(string). Volviendo al punto anterior (inicialización del bucle), una vez que ya tenemos el Hashcode (del string con el nonce concatenado), procedemos a realizar una evaluación del primer carácter, último carácter, carácter central, y el anterior al central. Para que el código hash sea válido, verificamos que se cumplan ciertas condiciones aritméticas con el código ASCII de estos caracteres. La cantidad de condiciones y el tipo de complejidad de estas repercuten en el tiempo de búsqueda del nonce apropiado. Si aumentamos las condiciones, y si las hacemos más "complejas”, el tiempo de búsqueda aumentará considerablemente.
 Una vez encontremos el nonce apropiado, procedemos a reemplazar los primeros cuatro valores del string Hashcode con '0000', y retornamos la cadena.
 
-```
+```c++
 //...
  string SHA256(char* data) 
 {
@@ -176,7 +176,7 @@ Una vez encontremos el nonce apropiado, procedemos a reemplazar los primeros cua
 ```
 
 ## Buscar  
-```
+```c++
 El buscar se basa en recorrer todos los block's hasta encontrar el corrercto por lo tanto la complejidad seria O(n)
 
 void BlockChain::find(string hashcode){
