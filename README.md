@@ -82,12 +82,98 @@ Para obtener el Hashcode del bloque, usamos el método de encriptación SHA256.
 
 De forma general, para obtener el código hash usamos todos los datos de la transacción, el índice del bloque, y el Código hash del bloque anterior (En caso de ser el bloque 1, el código hash previo es '0'), y posteriormente procedemos a concatenarlos en un string. Luego, iniciamos un bucle (se especifica más adelante) en donde se buscará un número(nonce) aleatorio en un rango determinado(1000 - 9999) que al concatenarse con el string previo y, al obtener el código hash de ese string (llamando a la función SHA256), se obtenga un Hashcode que inicie con 4 ceros.  
 
+```
+string Block::createHashcode() // el codigo hash depende de todos los valores del conjunto de registros, lo cual lo hace mas seguro
+{
+    string to_hash = "";
+    for (auto &it : registro)
+    {
+        to_hash += to_string(it->get_monto());
+        to_hash += it->get_emisor();
+        to_hash += it->get_receptor();
+        to_hash += it->get_date();
+        to_hash += it->get_time();
+    }
+
+    string sha;
+    clock_t t;
+    t = clock();
+    cout << endl
+         << "Buscando Nonce para Bloque " << this->index << "..." << endl;
+    int count = 0;
+    srand(time(NULL));
+    while (true)
+    {
+        int valor = 1000 + rand() % 9999;
+        string a = to_string(valor);
+        string b = to_hash;
+        a += b;
+        char nuevo[a.size() + 1];
+        strcpy(nuevo, a.c_str());
+        sha = SHA256(nuevo);
+        string c = "";
+        c += sha[0];
+        c += sha[1];
+        c += sha[2];
+        c += sha[3];
+        count += 1;
+        if (c == "0000")
+        {
+            double dif = (clock() - t) / (double)CLOCKS_PER_SEC;
+            cout << "!Nonce encontrado en: " << dif << " segundos" << endl
+                 << "(Se probaron " << count << " Nounces)" << endl;
+            this->nonce = valor;
+            break;
+        }
+    }
+
+    return sha;
+};
+```
+
 ### La función SHA256(Secure Hash Algorithm of 256 bytes)
 
 > Este algoritmo de encriptación es muy usado actualmente, y se dice que es el reemplazo del algoritmo de encriptación md5, debido a su seguridad y rapidez. No nos hemos adentrado a fondo a entender cómo funciona este algoritmo, por lo que la implementación de la función SHA256 que se usa en este proyecto no es propia. 
 
-La función que usamos en el proyecto retorna el código hash a partir de un conjunto de caracteres(string). Volviendo al punto anterior (inicialización del bucle), una vez que ya tenemos el Hashcode (del string con el nonce concatenado), procedemos a realizar una evaluación del primer carácter, último carácter, carácter central, y el anterior al central. Para que el código hash sea válido, verificamos que se cumplan ciertas condiciones aritméticas con el código ASCII de estos caracteres. La cantidad de condiciones y el tipo de complejidad de estas repercuten en el tiempo de búsqueda del nonce apropiado. Si aumentamos las condiciones, y si las hacemos más "complejas”, el tiempo de búsqueda aumentara considerablemente.
+La función que usamos en el proyecto retorna el código hash a partir de un conjunto de caracteres(string). Volviendo al punto anterior (inicialización del bucle), una vez que ya tenemos el Hashcode (del string con el nonce concatenado), procedemos a realizar una evaluación del primer carácter, último carácter, carácter central, y el anterior al central. Para que el código hash sea válido, verificamos que se cumplan ciertas condiciones aritméticas con el código ASCII de estos caracteres. La cantidad de condiciones y el tipo de complejidad de estas repercuten en el tiempo de búsqueda del nonce apropiado. Si aumentamos las condiciones, y si las hacemos más "complejas”, el tiempo de búsqueda aumentará considerablemente.
 Una vez encontremos el nonce apropiado, procedemos a reemplazar los primeros cuatro valores del string Hashcode con '0000', y retornamos la cadena.
+
+```
+//...
+ string SHA256(char* data) 
+{
+	int strLen = strlen(data);
+	SHA256_CTX ctx;
+	unsigned char hash[32];
+	string hashStr = "";
+
+	SHA256Init(&ctx);
+	SHA256Update(&ctx, (unsigned char*)data, strLen);
+	SHA256Final(&ctx, hash);
+
+	char s[3];
+	for (int i = 0; i < 32; i++) {
+		sprintf(s, "%02x", hash[i]);
+		hashStr += s;
+	}
+	//cond
+	int val = 1 + rand() % 999999;
+	int a = int(hashStr[0]);
+	a+=int(hashStr[hashStr.size()/2]);
+	int b = int(hashStr[hashStr.size()-1]);
+	b += int(hashStr[(hashStr.size()/2)-1]);
+	if((a+b)>300 && (a+b)%2!=0 && (a>b) && (a*9)%7>5 && (b*7)%9>=8 && ((a*b)%9)+2 < 8 && (a/b)%2!=0 && val>4444 && val<4480) 
+	{
+		string hashcode = "0000";
+		for(int i=4;i<hashStr.size();i++){
+			hashcode+=hashStr[i];
+		}
+		return hashcode;
+	}
+	else
+		return hashStr;
+}
+```
 
 ## Buscar  
 ```
