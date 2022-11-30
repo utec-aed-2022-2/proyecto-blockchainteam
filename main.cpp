@@ -49,7 +49,7 @@ int menu(BlockChain &cadena)
         {
             cout << "Cuantas Transacciones ingresara? (multiplo de 4, minimo 4): ";
             cin >> v;
-        } while (v <= 0 || v % 4 != 0);
+        } while (v <= 0 || v % 4 != 0);   //d
         int tr= v/4;
         for (int i = 0; i < tr; i++)
         {
