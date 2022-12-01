@@ -2,20 +2,22 @@
 #define BLOCKCHAIN_H
 #include "bst_m.h"
 #include "block.h"
+#include "forward.h"
 
 using namespace std;
 class BlockChain
 {
 private:
-    forward_list<Block *> chain; // <hashcode, bloque>
-    int n_elements;              // number of elements;
-    BSTree<int> searchTree;
+    ForwardList<Block *> chain; // <hashcode, bloque>
+    int n_elements;             // number of elements;
+    BSTree<int> searchTree;     // para busquedas.
 
 public:
     BlockChain() { this->n_elements = 0; };
-    ~BlockChain() {
+    ~BlockChain()
+    {
         searchTree.~BSTree();
-        chain.~forward_list();
+        chain.~ForwardList();
         delete this;
     };
     int size();
@@ -26,6 +28,7 @@ public:
     void modifyDataOfBlock();
     void addNamesToTree();
     void findByName(string name);
+    bool isValid();
 };
 void BlockChain::insert_block(vector<DataD *> reg)
 {
@@ -67,25 +70,39 @@ void BlockChain::insert_block(vector<DataD *> reg)
          << endl;
 };
 
+bool BlockChain::isValid()
+{
+}
+
 void BlockChain::find(string hashcode)
 {
-    /*
-    for(auto &it: chain){
-        if(it->get_hash()==hashcode){
-            cout<<endl<<"Se encontro el bloque..."<<endl;
-            cout<<"######################################################################################"<<endl
-            <<endl<<"\t\t\t\tBLOQUE NRO: "<<it->get_index()<<endl<<endl
-            <<"NONCE: "<<it->get_nonce()<<endl
-            <<"NRO TRANSACCIONES:  "<<4<<endl<<endl;
-            it->show_data();
-            cout<<"CODIGO HASH PREVIO: "<<it->get_prev_hash()<<endl
-            <<"CODIGO HASH: "<<it->get_hash()<<endl<<endl
-            <<"######################################################################################"<<endl<<endl;
+    clock_t t;
+    t = clock();
+    srand(time(NULL));
+
+    for (int i = 0; i < chain.size(); i++)
+    {
+        if (chain[i]->get_hash() == hashcode)
+        {
+            cout << endl
+                 << "Se encontro el bloque..." << endl;
+            cout << "######################################################################################" << endl
+                 << endl
+                 << "\t\t\t\tBLOQUE NRO: " << chain[i]->get_index() << endl
+                 << endl
+                 << "NONCE: " << chain[i]->get_nonce() << endl;
+            // it->show_data();
+            cout << "CODIGO HASH PREVIO: " << *(chain[i]->get_prev_hash()) << endl
+                 << "CODIGO HASH: " << chain[i]->get_hash() << endl
+                 << endl
+                 << "######################################################################################" << endl
+                 << endl;
+            double dif = (clock() - t) / (double)CLOCKS_PER_SEC;
+            cout << "Exec Time con busqueda lineal: " << dif << endl;
             return;
         }
     }
-    cout<<"No se encontro el bloque...\n";
-    */
+    cout << "No se encontro el bloque...\n";
 }
 
 int BlockChain::size()
@@ -102,17 +119,25 @@ void BlockChain::modifyDataOfBlock() // for secure test
 {
 }
 
-void BlockChain::findByName(string name){
+void BlockChain::findByName(string name)
+{
+    clock_t t;
+    t = clock();
+    srand(time(NULL));
+
     searchTree.findAndShow(name);
+
+    double dif = (clock() - t) / (double)CLOCKS_PER_SEC;
+    cout << "Exec Time con busqueda logaritmica: " << dif << endl;
 }
 
 void BlockChain::addNamesToTree()
 {
     string name;
-    int j=0;
+    int j = 0;
     for (auto &it : chain.front()->getDataBlock())
     {
-        
+
         for (auto i : it->get_data())
         {
             for (auto k : i)

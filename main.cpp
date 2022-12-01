@@ -8,7 +8,7 @@ int menu(BlockChain &cadena);
 void test(BlockChain &cadena);
 void insert_data(BlockChain &cadena);
 vector<DataD *> loadCSV(string file);
-void newTest();
+void newTest(BlockChain &cadea);
 
 int main()
 {
@@ -69,7 +69,7 @@ int menu(BlockChain &cadena)
     }
     else if (var == 4)
     {
-        newTest();
+        newTest(cadena);
     }
     else if(var == 5){
         string name;
@@ -81,18 +81,18 @@ int menu(BlockChain &cadena)
         return 6;
 };
 
-void newTest()
+void newTest(BlockChain &cadena)
 {
     //insercion de data de un bloque
+    
     cout << "Ingrese la informacion por filas separadas por comas...\n";
-    int n_f;
-    cout<<"Ingrese cantidad de filas (max 4): ";cin>>n_f;
-    int count=0;
-    vector<vector<string>> data(n_f);
+    int n_f = 4;
+    int count = 0;
+    vector<DataD*> data(n_f);
     string fila;
-    while (n_f!=0)
+    while (count!=n_f)
     {
-        getline(cin, fila);
+        cin>>fila;
         int n_words = 1;
         for (auto i : fila)
         {
@@ -106,19 +106,24 @@ void newTest()
         {
             if (i == ',')
             {
+
                 fila_to_b[pos] = temp;
                 pos++;
+                temp = "";
             }
+            else if(i == fila[fila.size()-1]){
+                fila_to_b[pos] = temp;
+             }
             else
             {
                 temp += i;
             }
         }
-        data[count] = fila_to_b;
+        DataD* dt = new DataD(fila_to_b);
+        data[count] = dt;
         count++;
-        n_f--;
     }
-
+    cadena.insert_block(data);
 }
 
 void insert_data(BlockChain &cadena)
