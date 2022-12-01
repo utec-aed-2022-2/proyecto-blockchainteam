@@ -41,7 +41,7 @@ DESCRIPCIÓN ESTRUCTURAS:
 - **Transaction.h** : Contiene los datos de las transacciones y es conectada con cada bloque. En este apartado se puede tener mas de una transacción dentro de un bloque. 
 - **sha256.h** : Se realiza el método de encriptación para la generación del Hash y prevHash.
 - **md5.h** : Se usa para realizar el método de encriptación para la base de datos (PostressSQL), con el fin de tener un backup de las transacciones de forma segura e inaccesible para cualquier persona.  
-- **mysql.cpp** : El archivo se encarga de realizar la conexión entre la base de datos en la nube del servicio AWS. _**(En Proceso)**_
+- **mysql.cpp** : El archivo se encarga de realizar la conexión entre la base de datos en la nube del servicio AWS. 
 
 # Conplejidad Big O  
 
@@ -50,31 +50,48 @@ DESCRIPCIÓN ESTRUCTURAS:
 - Partiendo del concepto de listas enlazadas, la complejidad del insert será 
 O(1), ya que se sacara el hash del ultimo bloque existente para vincularlo con el nuevo bloque el cual se insertara al inicio.
 ```c++
-void insert_block ( list<TransactionD*> reg) {   
-    int index = n_elements+1;                               //O(1)
-    string cod;                                             //O(1)
-    if(n_elements == 0){
-        cod = "0";
+void BlockChain::insert_block(vector<DataD *> reg)
+{
+    int index = n_elements + 1;
+    string *cod = nullptr;
+    if (n_elements == 0)
+    {
+        cod = nullptr;
     }
-    else{
-        cod = chain.front()->get_hash();                    //O(1)
+    else
+    {
+        cod = &(chain.front()->get_hash());
     };
-    Block * newBlock = new Block(index, cod, reg);          //O(1)
-    chain.push_front(newBlock);                             //O(1)
+    Block *newBlock = new Block(reg, n_elements + 1);
+    // newBlock->prev = chain.front();//apunta al anterior
+    newBlock->setPrevHashcode(cod);
+    chain.push_front(newBlock);
+    addNamesToTree();
+    // aqui ya tengo la data en el blockchain, ahora tengo que buscar nombres y setearlos al arbol
     this->n_elements++;
-    
-    cout<<"######################################################################################"<<endl
-        <<endl<<"\t\t\t\tBLOQUE NRO: "<<index<<endl<<endl
-        <<"NONCE: "<<newBlock->get_nonce()<<endl
-        <<"NRO TRANSACCIONES:  "<<4<<endl<<endl; 
-        newBlock->show_data();
-        cout<<"CODIGO HASH PREVIO: "<<newBlock->get_prev_hash()<<endl
-        <<"CODIGO HASH: "<<newBlock->get_hash()<<endl<<endl
-        <<"######################################################################################"<<endl<<endl;
-        
+
+    cout << "######################################################################################" << endl
+         << endl
+         << "\t\t\t\tBLOQUE NRO: " << index << endl
+         << endl
+         << "NONCE: " << newBlock->get_nonce() << endl
+         << "NRO TRANSACCIONES:  " << 4 << endl
+         << endl;
+    newBlock->show_data();
+    string ph;
+    if (newBlock->get_prev_hash() == nullptr)
+        ph = '0';
+    else
+        ph = *(newBlock->get_prev_hash());
+    cout << "CODIGO HASH PREVIO: " << ph << endl
+         << "CODIGO HASH: " << newBlock->get_hash() << endl
+         << endl
+         << "######################################################################################" << endl
+         << endl;
 };
 
 >> Complejidad = O(1)
+
 ```
 ## Búsqueda del Nonce
 
@@ -131,6 +148,8 @@ string Block::createHashcode() // el codigo hash depende de todos los valores de
 };
 ```
 
+
+
 ### La función SHA256(Secure Hash Algorithm of 256 bytes)
 
 > Este algoritmo de encriptación es muy usado actualmente, y se dice que es el reemplazo del algoritmo de encriptación md5, debido a su seguridad y rapidez. No nos hemos adentrado a fondo a entender cómo funciona este algoritmo, por lo que la implementación de la función SHA256 que se usa en este proyecto no es propia. 
@@ -175,33 +194,42 @@ Una vez encontremos el nonce apropiado, procedemos a reemplazar los primeros cua
 }
 ```
 
-## Buscar  
 
-El buscar se basa en recorrer todos los block's hasta encontrar el corrercto por lo tanto la complejidad seria O(n).
+
+## Buscar  (BST).
+
+Para realizar el método de la busqueda, nos basamos en la suma de los codigos ascci del nombre (Quien seria nuestro índice para la búsqueda)
+
 ```c++
-void BlockChain::find(string hashcode){
-
-    for(auto &it: chain){                               //O(n)
-        if(it->get_hash()==hashcode){                   //O(1)
-            cout<<endl<<"Se encontro el bloque..."<<endl;
-            cout<<"######################################################################################"<<endl
-            <<endl<<"\t\t\t\tBLOQUE NRO: "<<it->get_index()<<endl<<endl         //O(1)
-            <<"NONCE: "<<it->get_nonce()<<endl                                  //O(1)
-            <<"NRO TRANSACCIONES:  "<<4<<endl<<endl; 
-            it->show_data();                                                    //O(1)
-            cout<<"CODIGO HASH PREVIO: "<<it->get_prev_hash()<<endl             //O(1)
-            <<"CODIGO HASH: "<<it->get_hash()<<endl<<endl                       //O(1)
-            <<"######################################################################################"<<endl<<endl;
-            return;
-        } 
+void findAndShow(string name){
+        int x = 0;
+        for(auto i:name){
+            x+=int(i);
+        }
+        int count=1;
+        NodeBT<T> *its = find(this->root, x);
+        if (its != nullptr){
+            if (its->name == name){
+               cout<<"Se encontro el Nombre..."<<endl
+                   <<"Mostrando Informacion..."<<endl<<endl;
+                for(auto i: its->whereToFind)
+                {
+                    cout<<"Data #"<<count<<':'<<endl;
+                    for(auto l: (i.first->getDataBlock()[i.second]->get_data())){
+                        cout<<l<<", ";
+                    }
+                    count++;
+                    cout<<endl<<endl;
+                }
+            } 
+            else cout<<"El nombre no se encuentra el el BlockChain"<<endl;
+        }
+       
+        
     }
-    cout<<"No se encontro el bloque...\n";
-}
 ```  
 >> Complejidad = O(n)
 
-# Comparación (Con índices | Sin índices)  
-_**En proceso**_  
 
 # Conclusión
 En conclusión la tecnología del BLockChain tiene la posibilidad de brindar la confidencialidad de nuestros usuarios y así mismo puede brindar la seguridad de cada uno de los datos. Esta tecnología puede llegar a ser la nueva alternativa que muchos usuarios obtarian ya que puede ser usado en distintas ramas ya sea legales, sociales, financieras y entre otros. 

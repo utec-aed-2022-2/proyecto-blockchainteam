@@ -67,9 +67,8 @@ void BlockChain::insert_block(vector<DataD *> reg)
          << endl;
 };
 
-void BlockChain::find(string hashcode)
+/* void BlockChain::find(string hashcode)
 {
-    /*
     for(auto &it: chain){
         if(it->get_hash()==hashcode){
             cout<<endl<<"Se encontro el bloque..."<<endl;
@@ -85,8 +84,8 @@ void BlockChain::find(string hashcode)
         }
     }
     cout<<"No se encontro el bloque...\n";
-    */
-}
+    
+} */
 
 int BlockChain::size()
 {

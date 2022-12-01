@@ -24,7 +24,6 @@ void generate_random_block(
         }
         INSERTS.close();
         SEARCH.close();
-        INSERTS.close();
         GENERATE.clear();
         // Inicio
         Font font;
@@ -35,14 +34,46 @@ void generate_random_block(
         Text texto("GENERAR BLOQUE",font);
 
         GENERATE.draw(texto);
-        // Listar Bloques
+
+        // Listar Bloques 
+        
+        vector<Text> Emisor(10);
+        vector<Text> Receptor(10);
+        vector<Text> hashs(10);
+        vector<Text> monto(10);
         vector<Text> lista(10);
+
         Text txt;
         int x = 0;
-        for(int i=0; i<10;i++){
+        for(int i=0 ; i<10 ; i++){
             x += 50;
-            String cadena = "BUUU" ;
-            
+            String cadena = "C***C" ;            
+            txt.setString(cadena);
+            txt.setFont(font);
+            txt.setFillColor(Color::White);
+            txt.setCharacterSize(40);
+
+            // Posición del txt (X , Y)
+            txt.setPosition(200 , 100 + x);
+            Emisor.push_back(txt);
+        }
+        x = 0;
+        for(int i=0 ; i<10 ; i++){
+            x += 50;
+            String cadena = "A****A" ;            
+            txt.setString(cadena);
+            txt.setFont(font);
+            txt.setFillColor(Color::White);
+            txt.setCharacterSize(40);
+
+            // Posición del txt (X , Y)
+            txt.setPosition(220 , 100 + x);
+            Receptor.push_back(txt);
+        }   
+
+        for(int i=0 ; i<10 ; i++){
+            x += 50;
+            String cadena = "B-----B" ;            
             txt.setString(cadena);
             txt.setFont(font);
             txt.setFillColor(Color::White);
@@ -50,13 +81,15 @@ void generate_random_block(
 
             // Posición del txt (X , Y)
             txt.setPosition(250 , 100 + x);
-            lista.push_back(txt);
-
+            monto.push_back(txt);
         }   
                 
 
-        for(unsigned int i = 0; i < lista.size(); i++){
-            GENERATE.draw(lista[i]);
+        for(unsigned int i = 0; i < Emisor.size(); i++){
+            GENERATE.draw(Emisor[i]);
+            GENERATE.draw(Receptor[i]);
+            GENERATE.draw(monto[i]);
+            
 
         }
 
@@ -84,6 +117,7 @@ void insert_block(
         GENERATE.close();
         SEARCH.close();
         INSERTS.clear();
+
         Font font;
         if (!font.loadFromFile("fonts/Tacoma.ttf")){
             system("echo No se encuentra la fuente &pause");
@@ -116,7 +150,7 @@ void search_block(
             }
         }
         GENERATE.close();
-        INSERTS.clear();
+        INSERTS.close();
         SEARCH.clear();
         Font font;
         if (!font.loadFromFile("fonts/Tacoma.ttf")){
@@ -139,7 +173,7 @@ int main(){
         while (MENU.pollEvent(event)){
             if(event.type == Event::Closed) MENU.close(); 
             if(event.type == Event::KeyReleased) {
-                if(event.key.code == Keyboard::Up){
+                if(event.key.code == Keyboard::Up){ // Si es flecha arriba
                     MainMenu.MoveUp();
                     break;
                 }
@@ -147,6 +181,7 @@ int main(){
                     MainMenu.MoveDown();
                     break;
                 }
+
                 if(event.key.code == Keyboard::Return){
                     RenderWindow GENERATE(VideoMode(960,720),"GENERATE");
                     RenderWindow INSERTS(VideoMode(960,720),"INSERTS");
