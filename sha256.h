@@ -155,7 +155,7 @@ void SHA256Final(SHA256_CTX *ctx, uchar hash[])
 	}
 }
 
-string SHA256(char* data) {
+pair<string,int> SHA256(char* data, int v) {
 	int strLen = strlen(data);
 	SHA256_CTX ctx;
 	unsigned char hash[32];
@@ -171,21 +171,25 @@ string SHA256(char* data) {
 		hashStr += s;
 	}
 	//cond
-	int val = 1 + rand() % 999999;
+	int val;
+	if(v==0)
+		val = 1 + rand() % 999999;
+	else val = v;
 	int a = int(hashStr[0]);
 	a+=int(hashStr[hashStr.size()/2]);
 	int b = int(hashStr[hashStr.size()-1]);
 	b += int(hashStr[(hashStr.size()/2)-1]);
+	//cout<<"a: "<<a<<", b: "<<b<<endl;
 	if((a+b)>300 && (a+b)%2!=0 && (a>b) && (a*9)%7>5 && (b*7)%9>=8 && ((a*b)%9)+2 < 8 && (a/b)%2!=0 && val>4444 && val<4480) 
 	{
 		string hashcode = "0000";
 		for(int i=0;i<hashStr.size()-4;i++){
 			hashcode+=hashStr[i];
 		}
-		return hashcode;
+		return {hashcode, val};
 	}
 	else
-		return hashStr;
+		return {hashStr, 0};
 }
 
 #endif
